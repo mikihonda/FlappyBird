@@ -12,6 +12,7 @@
 		FC53611F203E629D00144B0D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC53611D203E629D00144B0D /* Main.storyboard */; };
 		FC536121203E629D00144B0D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FC536120203E629D00144B0D /* Assets.xcassets */; };
 		FC536124203E629D00144B0D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC536122203E629D00144B0D /* LaunchScreen.storyboard */; };
+		FC53612C2042E28700144B0D /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC53612B2042E28700144B0D /* GameScene.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		FC536120203E629D00144B0D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FC536123203E629D00144B0D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FC536125203E629D00144B0D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FC53612B2042E28700144B0D /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +62,7 @@
 				FC536120203E629D00144B0D /* Assets.xcassets */,
 				FC536122203E629D00144B0D /* LaunchScreen.storyboard */,
 				FC536125203E629D00144B0D /* Info.plist */,
+				FC53612B2042E28700144B0D /* GameScene.swift */,
 			);
 			path = FlappyBird;
 			sourceTree = "<group>";
@@ -136,6 +139,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FC53612C2042E28700144B0D /* GameScene.swift in Sources */,
 				FC53611C203E629D00144B0D /* ViewController.swift in Sources */,
 				FC53611A203E629D00144B0D /* AppDelegate.swift in Sources */,
 			);
@@ -275,13 +279,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 78388A6R49;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = FlappyBird/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = jp.techacademy.miki.honda.FlappyBird;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -290,13 +294,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 78388A6R49;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = FlappyBird/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = jp.techacademy.miki.honda.FlappyBird;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
