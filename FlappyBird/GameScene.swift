@@ -360,7 +360,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             // ハートと衝突した
             print("ScoreUp")
             score += 1
-            scoreLabelNode.text = "Item Score:\(itemScore)"
+            scoreLabelNode.text = "Item Score:\(score)"
             
             var itemScore = userDefaults.integer(forKey: "ITEM")
             itemScore = score
