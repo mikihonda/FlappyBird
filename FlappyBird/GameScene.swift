@@ -282,6 +282,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         // 自身を取り除くアクションを作成
         let removeHeart = SKAction.removeFromParent()
+        //let removeHeart = SKAction.fadeOut(withDuration: 2.0)
+        
         
         // ２つのアニメーションを順に実行するアクションを作成
         let heartAnimation = SKAction.sequence([moveHeart, removeHeart])
@@ -290,16 +292,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let createHeartAnimation = SKAction.run({
             // ハート関連のノードを乗せるノードを作成(SKSpriteNodeは画像を表示するノード)
             let heart = SKSpriteNode(texture: heartTexture)
-            heart.position = CGPoint(x: self.frame.size.width * 0.2, y: self.frame.size.height * 0.9
+            heart.position = CGPoint(x: self.frame.size.width * 0.3, y: self.frame.size.height * 0.9
             )
             heart.zPosition = -30.0 // 雲と壁より手前、地面より奥
             
             // スプライトに物理演算を設定する
             heart.physicsBody = SKPhysicsBody(rectangleOf: heartTexture.size())
             heart.physicsBody?.categoryBitMask = self.heartCategory
-            
-            // 衝突の時に消えるように設定する
-            
             
             // ハートと鳥がぶつかったときにHeartupとログが出ることを確認
             heart.physicsBody = SKPhysicsBody(rectangleOf: heartTexture.size())
@@ -312,7 +311,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         })
         
         // 次のハート作成までの待ち時間のアクションを作成
-        let waitAnimation = SKAction.wait(forDuration: 2)
+        let waitAnimation = SKAction.wait(forDuration: 2.0)
         
         // ハートを作成＞待ち時間＞ハートを作成を無限に繰り返すアクションを作成
         let repeatForeverAnimation = SKAction.repeatForever(SKAction.sequence([createHeartAnimation, waitAnimation]))
