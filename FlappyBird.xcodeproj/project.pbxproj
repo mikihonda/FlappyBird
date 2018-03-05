@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FC1AE8D5204C2B0800C0CFD6 /* itemgetsea.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = FC1AE8D4204C2B0800C0CFD6 /* itemgetsea.mp3 */; };
 		FC53611A203E629D00144B0D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC536119203E629D00144B0D /* AppDelegate.swift */; };
 		FC53611C203E629D00144B0D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC53611B203E629D00144B0D /* ViewController.swift */; };
 		FC53611F203E629D00144B0D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC53611D203E629D00144B0D /* Main.storyboard */; };
@@ -16,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		FC1AE8D4204C2B0800C0CFD6 /* itemgetsea.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = itemgetsea.mp3; sourceTree = "<group>"; };
 		FC536116203E629D00144B0D /* FlappyBird.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlappyBird.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC536119203E629D00144B0D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FC53611B203E629D00144B0D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -56,6 +58,7 @@
 		FC536118203E629D00144B0D /* FlappyBird */ = {
 			isa = PBXGroup;
 			children = (
+				FC1AE8D4204C2B0800C0CFD6 /* itemgetsea.mp3 */,
 				FC536119203E629D00144B0D /* AppDelegate.swift */,
 				FC53611B203E629D00144B0D /* ViewController.swift */,
 				FC53611D203E629D00144B0D /* Main.storyboard */,
@@ -126,6 +129,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FC1AE8D5204C2B0800C0CFD6 /* itemgetsea.mp3 in Resources */,
 				FC536124203E629D00144B0D /* LaunchScreen.storyboard in Resources */,
 				FC536121203E629D00144B0D /* Assets.xcassets in Resources */,
 				FC53611F203E629D00144B0D /* Main.storyboard in Resources */,

@@ -7,6 +7,9 @@
 //
 
 import SpriteKit
+import AVFoundation
+
+private let JKAudioInstance = GameScene()
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
     
@@ -14,6 +17,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var wallNode:SKNode!
     var bird:SKSpriteNode!
     var heartNode:SKNode!
+    
+    var soundPlayer: AVAudioPlayer!
     
     // 衝突判定カテゴリー
     let birdCategory: UInt32 = 1 << 0    // 0...00001
@@ -71,7 +76,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         // スクロールするアクションを作成
         // 左方向に画像一枚分スクロールさせるアクション
-        let moveGround = SKAction.moveBy(x: -groundTexture.size().width , y: 0, duration: 5.0)
+        let moveGround = SKAction.moveBy(x: -groundTexture.size().width , y: 0, duration: 3.0) //5.0
         
         // 元の位置に戻すアクション
         let resetGround = SKAction.moveBy(x: groundTexture.size().width, y: 0, duration: 0.0)
@@ -152,7 +157,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let movingDistance = CGFloat(self.frame.size.width + wallTexture.size().width)
         
         // 画面外まで移動するアクションを作成
-        let moveWall = SKAction.moveBy(x: -movingDistance, y: 0, duration: 6.0) // 6.0に変更
+        let moveWall = SKAction.moveBy(x: -movingDistance, y: 0, duration: 4.0) // 6.0に変更
         
         // 自身を取り除くアクションを作成
         let removeWall = SKAction.removeFromParent()
@@ -170,7 +175,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             //画面のY軸の中央値
             let center_y = self.frame.size.height / 2
             // 壁のY座標を上下ランダムにさせる時の最大値
-            let random_y_range = self.frame.size.height / 4
+            let random_y_range = self.frame.size.height / 3 //4
             // 下の壁のY軸の下限
             let under_wall_lowest_y = UInt32( center_y - wallTexture.size().height / 2 - random_y_range / 2)
             // 1~random_y_rangeまでのランダムな整数を生成
@@ -179,7 +184,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             let under_wall_y = CGFloat(under_wall_lowest_y + random_y)
             
             // キャラが通り抜ける隙間の長さ
-            let slit_length = self.frame.size.height / 6
+            let slit_length = self.frame.size.height / 3 //6
             
             // 下側の壁を作成
             let under = SKSpriteNode(texture: wallTexture)
@@ -247,7 +252,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         bird.position = CGPoint(x: self.frame.size.width * 0.2, y: self.frame.size.height * 0.7)
         
         // 物理演算を設定
-        bird.physicsBody = SKPhysicsBody(circleOfRadius: bird.size.height / 2.0)
+        bird.physicsBody = SKPhysicsBody(circleOfRadius: bird.size.height / 1.5) // 2.0
         
         // 衝突した時に回転させない
         bird.physicsBody?.allowsRotation = false
@@ -273,7 +278,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let movingDistance = CGFloat(self.frame.size.width + heartTexture.size().width)
         
         // 画面外まで移動するアクションを作成
-        let moveHeart = SKAction.moveBy(x: -movingDistance, y: 0, duration:4.0)
+        let moveHeart = SKAction.moveBy(x: -movingDistance, y: 0, duration:10.0)
         
         // 自身を取り除くアクションを作成
         let removeHeart = SKAction.removeFromParent()
@@ -285,7 +290,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let createHeartAnimation = SKAction.run({
             // ハート関連のノードを乗せるノードを作成(SKSpriteNodeは画像を表示するノード)
             let heart = SKSpriteNode(texture: heartTexture)
-            heart.position = CGPoint(x: self.frame.size.width * 0.2, y: self.frame.size.height * 0.7)
+            heart.position = CGPoint(x: self.frame.size.width * 0.2, y: self.frame.size.height * 0.9
+            )
             heart.zPosition = -30.0 // 雲と壁より手前、地面より奥
             
             // スプライトに物理演算を設定する
@@ -293,17 +299,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             heart.physicsBody?.categoryBitMask = self.heartCategory
             
             // 衝突の時に消えるように設定する
-            // heart.physicsBody?.isDynamic = false
             
-            // スコアアップ用のノード
-            let scoreNode = SKNode()
-            scoreNode.position = CGPoint(x: heart.size.width + self.bird.size.width / 2, y: self.frame.height / 2.0)
-            scoreNode.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: heart.size.width, height: self.frame.size.height))
-            scoreNode.physicsBody?.isDynamic = false
-            scoreNode.physicsBody?.categoryBitMask = self.scoreCategory
-            scoreNode.physicsBody?.contactTestBitMask = self.birdCategory
             
-            heart.addChild(scoreNode)
+            // ハートと鳥がぶつかったときにHeartupとログが出ることを確認
+            heart.physicsBody = SKPhysicsBody(rectangleOf: heartTexture.size())
+            heart.physicsBody?.categoryBitMask = self.heartCategory
+            heart.physicsBody?.isDynamic = true
             
             heart.run(heartAnimation)
             
@@ -358,7 +359,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             
         if (contact.bodyA.categoryBitMask & heartCategory) == heartCategory || (contact.bodyB.categoryBitMask & heartCategory) == heartCategory {
             // ハートと衝突した
-            print("ScoreUp")
+            print("HeartUp")
             score += 1
             scoreLabelNode.text = "Item Score:\(score)"
             
@@ -366,6 +367,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             itemScore = score
             userDefaults.set(itemScore, forKey: "ITEM")
             userDefaults.synchronize()
+            
+            let audio = GameScene.sharedInstance()
+            audio.playSoundEffect(named: "itemgetsea.mp3")
+            
+            heartNode.removeAllChildren()
             
         } else {
             // 壁か地面と衝突した
@@ -424,8 +430,31 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         itemScoreLabelNode.zPosition = 100
         itemScoreLabelNode.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.left
         
-        let ItemScore = userDefaults.integer(forKey: "ITEM")
+        let itemScore = userDefaults.integer(forKey: "ITEM")
         itemScoreLabelNode.text = "Item Score:\(itemScore)"
         self.addChild(itemScoreLabelNode)
     }
+    
+    // 効果音
+        static var canShareAudio = false {
+            didSet {
+                canShareAudio ? try! AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryAmbient)
+                    : try! AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategorySoloAmbient)
+            }
+        }
+        
+        open class func sharedInstance() -> GameScene {
+            return JKAudioInstance
+        }
+        
+        
+        open func playSoundEffect(named fileName: String) {
+            if let url = Bundle.main.url(forResource: fileName, withExtension: "") {
+                soundPlayer = try? AVAudioPlayer(contentsOf: url)
+                soundPlayer.stop()
+                soundPlayer.numberOfLoops = 0
+                soundPlayer.prepareToPlay()
+                soundPlayer.play()
+            }
+        }
 }
