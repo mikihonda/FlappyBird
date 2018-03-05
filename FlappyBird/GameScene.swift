@@ -354,9 +354,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 userDefaults.set(bestScore, forKey: "BEST")
                 userDefaults.synchronize()
             }
-        }
-            
-        if (contact.bodyA.categoryBitMask & heartCategory) == heartCategory || (contact.bodyB.categoryBitMask & heartCategory) == heartCategory {
+        } else if (contact.bodyA.categoryBitMask & heartCategory) == heartCategory || (contact.bodyB.categoryBitMask & heartCategory) == heartCategory {
             // ハートと衝突した
             print("HeartUp")
             score += 1
