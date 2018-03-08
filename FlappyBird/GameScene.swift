@@ -29,6 +29,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     // スコア
     var score = 0
+    var itemScore = 0
     var scoreLabelNode:SKLabelNode!
     var bestScoreLabelNode:SKLabelNode! // 文字の表示にはSKLabelNodeクラスを使う
     var itemScoreLabelNode:SKLabelNode!
@@ -357,11 +358,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         } else if (contact.bodyA.categoryBitMask & heartCategory) == heartCategory || (contact.bodyB.categoryBitMask & heartCategory) == heartCategory {
             // ハートと衝突した
             print("HeartUp")
-            score += 1
-            scoreLabelNode.text = "Item Score:\(score)"
+            itemScore += 1
+            scoreLabelNode.text = "Item Score:\(itemScore)"
             
-            var itemScore = userDefaults.integer(forKey: "ITEM")
-            itemScore = score
             userDefaults.set(itemScore, forKey: "ITEM")
             userDefaults.synchronize()
             
