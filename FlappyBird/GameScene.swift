@@ -359,7 +359,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             // ハートと衝突した
             print("HeartUp")
             itemScore += 1
-            scoreLabelNode.text = "Item Score:\(itemScore)"
+            itemScoreLabelNode.text = "Item Score:\(itemScore)"
             
             userDefaults.set(itemScore, forKey: "ITEM")
             userDefaults.synchronize()
